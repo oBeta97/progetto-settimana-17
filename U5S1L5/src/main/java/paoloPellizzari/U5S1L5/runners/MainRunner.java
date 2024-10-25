@@ -4,23 +4,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import paoloPellizzari.U5S1L5.entities.Edificio;
 import paoloPellizzari.U5S1L5.entities.Postazione;
 import paoloPellizzari.U5S1L5.entities.Prenotazione;
 import paoloPellizzari.U5S1L5.entities.Utente;
 import paoloPellizzari.U5S1L5.enums.TipoPostazione;
 import paoloPellizzari.U5S1L5.exceptions.*;
-import paoloPellizzari.U5S1L5.repositories.PostazioneRepository;
 import paoloPellizzari.U5S1L5.services.EdificioService;
 import paoloPellizzari.U5S1L5.services.PostazioneService;
 import paoloPellizzari.U5S1L5.services.PrenotazioneService;
 import paoloPellizzari.U5S1L5.services.UtenteService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
 
 @Component
 @Slf4j
@@ -120,6 +115,8 @@ public class MainRunner implements CommandLineRunner {
 //        - La prenotazione può essere effettuata solo se per quel giorno la postazione risulta libera
 
         try {
+
+            // Vanno midificati gli id perché vengono popolati randomicamente le prenotazioni
             Postazione postazione = postazioneService.getById(5);
             Utente utente = utenteService.findById(3);
             LocalDate dataPrenotazione = LocalDate.of(2024, 11, 15);
@@ -136,7 +133,6 @@ public class MainRunner implements CommandLineRunner {
 
 
 //        - Un utente può ricercare le postazioni indicando il tipo di postazione desiderato e la città di interesse
-
         List<Postazione> ricercaPostazioni = postazioneService.getPostazioniByTipoAndCitta(TipoPostazione.SALA_RIUNIONI, "Scotland");
 
         for(Postazione p : ricercaPostazioni)
@@ -144,6 +140,7 @@ public class MainRunner implements CommandLineRunner {
 
 //        - Un utente può avere più prenotazioni in corso, ma non può prenotare più di una postazione per una particolare data
         try {
+            // Vanno midificati gli id perché vengono popolati randomicamente le prenotazioni
             Postazione postazione = postazioneService.getById(3);
             Utente utente = utenteService.findById(3);
             LocalDate dataPrenotazione = LocalDate.of(2024, 12, 1);
