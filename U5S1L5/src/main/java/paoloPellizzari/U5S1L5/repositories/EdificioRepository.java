@@ -6,4 +6,9 @@ import paoloPellizzari.U5S1L5.entities.Edificio;
 
 @Repository
 public interface EdificioRepository extends JpaRepository<Edificio, Long> {
+
+
+    boolean existsByIndirizzo(String indirizzo);
+
+
 }

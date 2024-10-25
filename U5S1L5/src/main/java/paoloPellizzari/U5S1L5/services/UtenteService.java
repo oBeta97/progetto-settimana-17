@@ -7,6 +7,7 @@ import paoloPellizzari.U5S1L5.entities.Postazione;
 import paoloPellizzari.U5S1L5.entities.Utente;
 import paoloPellizzari.U5S1L5.enums.TipoPostazione;
 import paoloPellizzari.U5S1L5.exceptions.NotFoundException;
+import paoloPellizzari.U5S1L5.exceptions.UserAlreadyExistException;
 import paoloPellizzari.U5S1L5.repositories.PostazioneRepository;
 import paoloPellizzari.U5S1L5.repositories.UtenteRepository;
 
@@ -21,10 +22,18 @@ public class UtenteService {
     private UtenteRepository utenteRepo;
 
 
-    public void save(Utente u){
+    public void save(Utente u) throws UserAlreadyExistException {
 
-        if(utenteRepo.existsByUsernameOrEmail(u.getUsername(), u.getEmail())) throw new
+        if(utenteRepo.existsByUsernameOrEmail(u.getUsername(), u.getEmail())) throw new UserAlreadyExistException(u);
 
+        utenteRepo.save(u);
+
+    }
+
+    public void saveList(List<Utente> utenteList) throws UserAlreadyExistException {
+
+        for (Utente u : utenteList)
+            this.save(u);
     }
 
     public Utente findById(long id) throws NotFoundException {
@@ -36,5 +45,11 @@ public class UtenteService {
         return res.get();
 
     }
+
+
+    public List<Utente> getAll(){
+        return utenteRepo.findAll();
+    }
+
 
 }
