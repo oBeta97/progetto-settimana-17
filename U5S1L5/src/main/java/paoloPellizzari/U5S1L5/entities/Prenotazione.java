@@ -23,6 +23,8 @@ public class Prenotazione {
     @ManyToOne
     @JoinColumn(name = "id_utente")
     private Utente utente;
+    @ManyToOne
+    @JoinColumn(name = "id_postazione")
     private Postazione postazione;
 
     public Prenotazione(LocalDate data, Utente utente, Postazione postazione) {

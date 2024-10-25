@@ -21,12 +21,12 @@ public class Postazione {
     @Enumerated(EnumType.STRING)
     private TipoPostazione tipo;
     @Column(name = "nr_max_occupanti", nullable = false)
-    private short nrMaxOccupanti;
+    private int nrMaxOccupanti;
     @ManyToOne
     @JoinColumn(name = "id_edificio")
     private Edificio edificio;
 
-    public Postazione(String descrizione, TipoPostazione tipo, short nrMaxOccupanti, Edificio edificio) {
+    public Postazione(String descrizione, TipoPostazione tipo, int nrMaxOccupanti, Edificio edificio) {
         this.descrizione = descrizione;
         this.tipo = tipo;
         this.nrMaxOccupanti = nrMaxOccupanti;
